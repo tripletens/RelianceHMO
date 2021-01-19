@@ -17,13 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group([ 'prefix' => 'auth'], function (){ 
-    Route::group(['middleware' => ['guest:api']], function () {
-        Route::post('login', 'API\AuthController@login');
-        Route::post('signup', 'API\AuthController@signup');
-    });
-    Route::group(['middleware' => 'auth:api'], function() {
-        Route::get('logout', 'API\AuthController@logout');
-        Route::get('getuser', 'API\AuthController@getUser');
-    });
+Route::group([ 'prefix' => 'games'], function (){ 
+    Route::get('all', 'API\GamesController@get_all_games');
+    Route::post('player_game/add', 'API\GamesController@add_player_game');
+    Route::post('solo/start', 'API\GamesController@start_solo_game');
 }); 
