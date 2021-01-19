@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\Players;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -12,5 +12,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
+        factory(App\Players::class, 10000)->create();
+        $this->call(GamesTableSeeder::class);
+        // ->each(function ($user) {
+        //     $user->posts()->save(factory(App\Post::class)->make());
+        // });
     }
 }
