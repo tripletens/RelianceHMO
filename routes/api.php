@@ -21,4 +21,12 @@ Route::group([ 'prefix' => 'games'], function (){
     Route::get('all', 'API\GamesController@get_all_games');
     Route::post('player_game/add', 'API\GamesController@add_player_game');
     Route::post('solo/start', 'API\GamesController@start_solo_game');
+    Route::post('team/start', 'API\GamesController@start_game_team');
+    Route::post('team/join', 'API\GamesController@join_team_game');
+}); 
+
+Route::group([ 'prefix' => 'players'], function (){ 
+    Route::get('all', 'API\PlayerController@all_players_details');
+    Route::post('fetch_player', 'API\PlayerController@fetch_one_player_details');
+    Route::post('register', 'API\PlayerController@register_player');
 }); 

@@ -15,11 +15,11 @@ class CreateGamePlaysTable extends Migration
     {
         Schema::create('game_plays', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('game_id');
-            $table->integer('player_id');
-            $table->integer('host_id');
-            $table->integer('score');
-            $table->string('code');
+            $table->integer('game_id')->nullable();
+            $table->integer('player_id')->nullable();
+            $table->integer('host_id')->nullable();
+            $table->integer('score')->nullable();
+            $table->string('code')->nullable();
             $table->timestamps();
         });
     }

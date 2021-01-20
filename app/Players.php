@@ -37,4 +37,14 @@ class Players extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function playergames()
+    {
+        return $this->hasMany('App\PlayerGames','player_id','id');
+    }
+
+    public function gameplays()
+    {
+        return $this->hasMany('App\GamePlay','player_id','id');
+    }
 }
