@@ -47,7 +47,7 @@ return [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', 'https://www.pitchmic.com.ng'),
-            'port' => env('DB_PORT', '3306'),
+            'port' => env('DB_PORT', '5522'),
             'database' => env('DB_DATABASE', 'pitcczso_reliancehmo'),
             'username' => env('DB_USERNAME', 'pitcczso_reliancehmo'),
             'password' => env('DB_PASSWORD', 'reliancehmo'),
