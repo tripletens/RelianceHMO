@@ -23,6 +23,8 @@ Route::group([ 'prefix' => 'games'], function (){
     Route::post('solo/start', 'API\GamesController@start_solo_game');
     Route::post('team/start', 'API\GamesController@start_game_team');
     Route::post('team/join', 'API\GamesController@join_team_game');
+    Route::post('per_day', 'API\GamesController@games_played_per_day');
+    Route::post('between_dates', 'API\GamesController@get_games_date_range');
 }); 
 
 Route::group([ 'prefix' => 'players'], function (){ 

@@ -332,5 +332,99 @@ class GamesController extends Controller
             return response()->json($data,404);
         }
     }
+
+
+    public function games_played_per_day(Request $request){
+        $date = $request->date;
+
+        $validator = Validator::make($request->all(), [
+            'date' => 'required|date',
+        ]);
+
+        if ($validator->fails()) {
+            $data =  [
+                'status' => 'error',
+                'message'  => 'Validation Error',
+                'data' => $validator->errors()
+            ];
+    
+            return response()->json($data,404);
+        }
+
+        $gameplays = DB::table('game_plays')->whereDate('game_plays.created_at',$date)
+            ->join('games', 'game_plays.game_id', '=', 'games.id')
+            ->join('players', 'game_plays.player_id', '=', 'players.id')
+            ->select('game_plays.*', 'games.*', 'players.*' ,'games.name as game_name')
+        ->paginate(10);
+
+        if(count($gameplays) < 1){
+            $data =  [
+                'status' => 'error',
+                'message'  => 'No Game played on that day',
+                'data' => $gameplays
+            ];
+    
+            return response()->json($data,404);
+        }
+
+        $data =  [
+            'status' => 'success',
+            'message'  => 'Fetches the list of GamePlays in a given date',
+            'data' => [
+                        'games_plays' => $gameplays,
+                    ]
+
+        ];
+
+        return response()->json($data,200);
+
+    }
+
+    public function get_games_date_range(Request $request){
+        $date1 = $request->date1;
+        $date2 = $request->date2;
+
+        $validator = Validator::make($request->all(), [
+            'date1' => 'required|date',
+            'date2' => 'required|date',
+        ]);
+
+        if ($validator->fails()) {
+            $data =  [
+                'status' => 'error',
+                'message'  => 'Validation Error',
+                'data' => $validator->errors()
+            ];
+    
+            return response()->json($data,404);
+        }
+
+        $gameplays = DB::table('game_plays')->whereBetween('game_plays.created_at', [$date1, $date2])
+            ->join('games', 'game_plays.game_id', '=', 'games.id')
+            ->join('players', 'game_plays.player_id', '=', 'players.id')
+            ->select('game_plays.*', 'games.*', 'players.*' ,'games.name as game_name')
+            ->paginate(10);
+
+        if(count($gameplays) < 1){
+            $data =  [
+                'status' => 'error',
+                'message'  => 'No Game played between these days',
+                'data' => $gameplays
+            ];
+    
+            return response()->json($data,404);
+        }
+
+        $data =  [
+            'status' => 'success',
+            'message'  => 'Fetches the list of GamePlays in a given date',
+            'data' => [
+                        'games_plays' => $gameplays,
+                    ]
+
+        ];
+
+        return response()->json($data,200);
+    }
 }
 
