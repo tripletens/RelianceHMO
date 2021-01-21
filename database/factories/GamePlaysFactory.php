@@ -2,11 +2,11 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Game_plays;
+use App\GamePlay;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
-$factory->define(Game_plays::class, function (Faker $faker) {
+$factory->define(GamePlay::class, function (Faker $faker) {
     // `game_id`, `player_id`, `host_id`, `score`, `code`,
     return [
         'game_id' => rand(1,55), // this should be dynamic based on the number of games available 
