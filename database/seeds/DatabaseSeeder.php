@@ -18,8 +18,6 @@ class DatabaseSeeder extends Seeder
         factory(App\GamePlay::class, 3835)->create(); 
 
         $this->call(GamesTableSeeder::class);
-        // ->each(function ($user) {
-        //     $user->posts()->save(factory(App\Post::class)->make());
-        // });
+        
     }
 }

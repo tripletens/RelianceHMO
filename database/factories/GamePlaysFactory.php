@@ -12,7 +12,7 @@ $factory->define(GamePlay::class, function (Faker $faker) {
         'game_id' => rand(1,55), // this should be dynamic based on the number of games available 
         'player_id' => rand(1,10000), // 
         'host_id' => rand(1,10000),
-        'score' => $faker->number,
+        'score' => rand(1,10000),
         'code' => Str::random(10)
     ];
 });
