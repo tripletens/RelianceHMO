@@ -12,7 +12,7 @@ $factory->define(Players::class, function (Faker $faker) {
         //
         'name' => $faker->name,
         'nickname' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
+        'email' => rand(1000000,199999999) . $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'date_joined' => $faker->date,
         'last_login' => $faker->date,
